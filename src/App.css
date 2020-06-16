@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.heroimage{
+  width: 150px;
+  height: 150px;
+  margin-top: 13px;
+}
