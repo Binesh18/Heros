@@ -4,8 +4,18 @@ import './App.css';
 
 import { Navbar, NavbarBrand } from 'reactstrap';
 import Heros from './components/heroscomponent';
+import {HEROS} from './shared/heros.js';
 
 class App extends Component{
+
+  constructor(props){
+    super(props);
+
+    this.state={
+      heros:HEROS
+    }
+  }
+
   render(){
     return (
       <div className="App">
@@ -15,7 +25,7 @@ class App extends Component{
           </div>
         </Navbar>
 
-        <Heros />
+        <Heros heros={this.state.heros} />
 
       </div>
     );

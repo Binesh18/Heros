@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Media } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardBody, CardTitle, CardText } from 'reactstrap';
 import '../App.css';
 
 class Heros extends Component{
@@ -8,49 +8,48 @@ class Heros extends Component{
         super(props);
 
         this.state={
-            heros:[
-                {
-                    id: 0,
-                    name: 'Wolverine',
-                    image: 'images/wolverine.png',
-                    description:'Wolverine is a fictional character appearing in American comic books published by Marvel Comics, mostly in association with the X-Men. He is a mutant who possesses animal-keen senses, enhanced physical capabilities, a powerful regenerative ability known as a healing factor, and three retractable claws in each hand. Wolverine has been depicted variously as a member of the X-Men, Alpha Flight, and the Avengers.'
-                },
-                {
-                    id: 1,
-                    name: 'Spiderman',
-                    image: 'images/spiderman.png',
-                    description: 'Spider-Man is a fictional superhero created by writer-editor Stan Lee and writer-artist Steve Ditko. He first appeared in the anthology comic book Amazing Fantasy #15 (August 1962) in the Silver Age of Comic Books. He appears in American comic books published by Marvel Comics, as well as in a number of movies, television shows, and video game adaptations set in the Marvel Universe.'
-                },
-                {
-                    id: 2,
-                    name: 'Ironman',
-                    image: 'images/ironman.png',
-                    description: 'Iron Man is a fictional superhero appearing in American comic books published by Marvel Comics. The character was co-created by writer and editor Stan Lee, developed by scripter Larry Lieber, and designed by artists Don Heck and Jack Kirby. The character made his first appearance in Tales of Suspense #39 (cover dated March 1963), and received his own title in Iron Man #1 (May 1968).'
-                },
-                {
-                    id: 3,
-                    name: 'Thor',
-                    image: 'images/thor.png',
-                    description: 'Nordic legend tells the tale of the son of Odin, the heir to the throne of Asgard - he is THOR, renowned as the mightiest hero of mythology! Thor\'s strength, endurance, and quest for battle are far greater than his Asgardian brethren. The mighty Thor wields an enchanted Uru hammer, Mjolnir, and is master of thunder and lightning.'
-                }
-            ]
+            selectedHero: null
         };
+    }
+
+    onHeroSelected(hero){
+        this.setState({
+            selectedHero: hero
+        });
+    }
+
+    renderHero(){
+        if(this.state.selectedHero != null){
+            return(
+                <Card>
+                    <CardImg src={this.state.selectedHero.image} alt={this.state.selectedHero.name}/>
+                    <CardTitle>
+                        <b>{this.state.selectedHero.name}</b>
+                    </CardTitle>
+                    <CardBody>
+                        <CardText> {this.state.selectedHero.description} </CardText>
+                    </CardBody>
+                </Card>
+            );
+        }
+        else{
+            return(
+                <div></div>
+            );
+        }
     }
 
     render(){
 
-        const heros = this.state.heros.map( (hero) => {
+        const heros = this.props.heros.map( (hero) => {
             return(
-                <div key={hero.id} className="col-12">
-                    <Media tag='list'>
-                        <Media left middle  >
-                            <Media object src={hero.image} alt={hero.name} className="heroimage" />
-                        </Media>
-                        <Media body className="ml-5 mt-3">
-                            <Media heading>{hero.name}</Media>
-                            <p>{hero.description}</p>
-                        </Media>
-                    </Media>
+                <div className="col-5 ml-5 mt-5">
+                    <Card key={hero.id}  onClick={ () => this.onHeroSelected(hero)}>
+                        <CardImg src={hero.image} alt={hero.name}/>
+                        <CardImgOverlay>
+                            <CardTitle className="heroname"> {hero.name} </CardTitle>
+                        </CardImgOverlay>
+                    </Card>
                 </div>
             );
         });
@@ -58,9 +57,10 @@ class Heros extends Component{
         return(
             <div className="container">
                 <div className="row">
-                    <Media list>
-                        {heros}
-                    </Media>
+                    {heros}
+                </div>
+                <div className="row">
+                    {this.renderHero()}
                 </div>
             </div>
         );
