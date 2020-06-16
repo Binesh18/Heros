@@ -41,3 +41,12 @@
   color:red;
   text-align: left;
 }
+
+.jumbotron{
+  color: #FFFFFF;
+}
+
+.footer{
+  margin-top: 10px;
+  background-color: wheat;
+}

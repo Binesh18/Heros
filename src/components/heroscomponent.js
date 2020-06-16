@@ -22,11 +22,9 @@ class Heros extends Component{
         if(this.state.selectedHero != null){
             return(
                 <Card>
-                    <CardImg src={this.state.selectedHero.image} alt={this.state.selectedHero.name}/>
-                    <CardTitle>
-                        <b>{this.state.selectedHero.name}</b>
-                    </CardTitle>
+                    <CardImg top src={this.state.selectedHero.image} alt={this.state.selectedHero.name}/>
                     <CardBody>
+                        <CardTitle>   <b>{this.state.selectedHero.name}</b> </CardTitle>
                         <CardText> {this.state.selectedHero.description} </CardText>
                     </CardBody>
                 </Card>
@@ -43,9 +41,9 @@ class Heros extends Component{
 
         const heros = this.props.heros.map( (hero) => {
             return(
-                <div className="col-5 ml-5 mt-5">
+                <div className="col-10 col-md-4 offset-1  mt-5">
                     <Card key={hero.id}  onClick={ () => this.onHeroSelected(hero)}>
-                        <CardImg src={hero.image} alt={hero.name}/>
+                        <CardImg width="100%" src={hero.image} alt={hero.name}/>
                         <CardImgOverlay>
                             <CardTitle className="heroname"> {hero.name} </CardTitle>
                         </CardImgOverlay>
