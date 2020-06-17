@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../App.css'
 
+import { Link } from 'react-router-dom';
+
 
 class Footer extends Component{
 
@@ -12,10 +14,8 @@ class Footer extends Component{
                         <div className="col-4 col-md-3 align-self-center">
                             <h3>Links</h3>
                             <ul className="list-unstyled ">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="">Spiderman</a></li>
-                                <li><a href="">Wolverine</a></li>
-                                <li><a href="#">Contact Us</a></li>
+                                <li><Link to="/home">Home</Link></li>
+                                <li><Link to="/heros">Heros</Link></li>
                             </ul>                                              
                         </div>
                         <div className="col-8 col-md-6 align-self-center">

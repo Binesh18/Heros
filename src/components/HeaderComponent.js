@@ -1,16 +1,53 @@
 import React, {Component} from 'react';
-import { Navbar, NavbarBrand, Jumbotron } from 'reactstrap';
-
+import { Navbar, NavbarBrand, Jumbotron, Nav, NavbarToggler, NavItem, Collapse } from 'reactstrap';
 import '../App.css'
+
+import { NavLink } from 'react-router-dom';
 
 class Header extends Component{
 
+    constructor(props){
+        super(props);
+
+        this.state={
+            isNavOpen: false
+        }
+
+        this.toggleNav = this.toggleNav.bind(this);
+    }
+
+    toggleNav(){
+        this.setState({
+            isNavOpen: !this.state.isNavOpen
+        });
+    }
+
     render(){
+
+
         return(
-            <React.Fragment>
-                <Navbar dark color="primary">
+            <div>
+                <Navbar dark color="primary" expand="md">
                     <div className="container">
-                        <NavbarBrand href="/">Marvel</NavbarBrand>
+                        <NavbarToggler onClick={this.toggleNav}/>
+
+                        <NavbarBrand className="mr-auto" href="/">
+                            <img src="images/logo.png" alt="MARVEL" width="60px"/>
+                        </NavbarBrand>
+
+                        <Collapse navbar isOpen={this.state.isNavOpen}>
+                            <Nav navbar>
+                                <NavItem>
+                                    <NavLink className="nav-link" to='/'> 
+                                        <span className="fa fa-home fa-lg"></span>Home
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to='/heros'>Heros</NavLink>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+
                     </div>
                 </Navbar>
                 <Jumbotron>
@@ -23,7 +60,7 @@ class Header extends Component{
                         </div>
                     </div>
                 </Jumbotron>
-            </React.Fragment>
+            </div>
         );
     }
 }
