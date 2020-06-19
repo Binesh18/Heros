@@ -6,6 +6,7 @@ import Header from './HeaderComponent.js';
 import Footer from './FooterComponent.js';
 import Home from './HomeComponent';
 import HeroDescription from './HeroDescriptionComponent';
+import FormComponent from './FormComponent';
 
 import {HEROS} from '../shared/heros.js';
 
@@ -25,7 +26,7 @@ class Main extends Component{
 
         const home = () =>{
             return(
-                <Home />
+                <Home heros={this.state.heros} />
             );
         }
 
@@ -46,6 +47,8 @@ class Main extends Component{
                         <Route exact path="/heros" component={() => <Heros heros={this.state.heros} /> } />
                         
                         <Route path="/heros/:heroId" component={hero} />
+
+                        <Route path='/form' component={ () => <FormComponent /> } />
 
                         <Redirect to="/home" />
                     </Switch>

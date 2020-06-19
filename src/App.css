@@ -50,3 +50,25 @@
   margin-top: 10px;
   background-color: wheat;
 }
+
+.heroimg{
+  width: 250px;
+  height: 200px;
+}
+
+.mediaborder{
+  border-width: 2px;
+  border-style: solid;
+  border-color: grey;
+}
+
+.relative{
+  position: relative;
+}
+
+.position{
+  position: absolute;
+  right: 20px;
+  bottom: 0px;
+}
+

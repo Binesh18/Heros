@@ -32,7 +32,7 @@ class Header extends Component{
                         <NavbarToggler onClick={this.toggleNav}/>
 
                         <NavbarBrand className="mr-auto" href="/">
-                            <img src="images/logo.png" alt="MARVEL" width="60px"/>
+                            <img src="/images/logo.png" alt="MARVEL" width="60px"/>
                         </NavbarBrand>
 
                         <Collapse navbar isOpen={this.state.isNavOpen}>
@@ -44,6 +44,9 @@ class Header extends Component{
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link" to='/heros'>Heros</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/form">Form</NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>

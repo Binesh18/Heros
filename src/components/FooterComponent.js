@@ -16,6 +16,7 @@ class Footer extends Component{
                             <ul className="list-unstyled ">
                                 <li><Link to="/home">Home</Link></li>
                                 <li><Link to="/heros">Heros</Link></li>
+                                <li><Link to="/form">Form</Link></li>
                             </ul>                                              
                         </div>
                         <div className="col-8 col-md-6 align-self-center">
