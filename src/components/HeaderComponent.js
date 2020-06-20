@@ -48,6 +48,9 @@ class Header extends Component{
                                 <NavItem>
                                     <NavLink className="nav-link" to="/form">Form</NavLink>
                                 </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/uform">UForm</NavLink>
+                                </NavItem>
                             </Nav>
                         </Collapse>
 

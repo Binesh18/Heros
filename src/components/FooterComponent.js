@@ -17,6 +17,7 @@ class Footer extends Component{
                                 <li><Link to="/home">Home</Link></li>
                                 <li><Link to="/heros">Heros</Link></li>
                                 <li><Link to="/form">Form</Link></li>
+                                <li><Link to='/uform'>UForm</Link></li>
                             </ul>                                              
                         </div>
                         <div className="col-8 col-md-6 align-self-center">

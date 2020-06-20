@@ -7,6 +7,7 @@ import Footer from './FooterComponent.js';
 import Home from './HomeComponent';
 import HeroDescription from './HeroDescriptionComponent';
 import FormComponent from './FormComponent';
+import UncontrolledForm from './UncontrolledForm';
 
 import {HEROS} from '../shared/heros.js';
 
@@ -49,6 +50,8 @@ class Main extends Component{
                         <Route path="/heros/:heroId" component={hero} />
 
                         <Route path='/form' component={ () => <FormComponent /> } />
+
+                        <Route path='/uform' component={ () => <UncontrolledForm /> } />
 
                         <Redirect to="/home" />
                     </Switch>
