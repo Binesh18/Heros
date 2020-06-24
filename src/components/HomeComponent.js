@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Media } from 'reactstrap';
+import { Media, Carousel, CarouselItem, CarouselCaption, CarouselIndicators, CarouselControl } from 'reactstrap';
 
 import { Link } from 'react-router-dom';
 
@@ -9,13 +9,9 @@ class Home extends Component{
 
     constructor(props){
         super(props);
-
-
     }
 
     render(){
-
-        
 
         const heros = this.props.heros.map( (hero) => {
             return(

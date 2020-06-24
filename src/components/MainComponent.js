@@ -9,31 +9,44 @@ import HeroDescription from './HeroDescriptionComponent';
 import FormComponent from './FormComponent';
 import UncontrolledForm from './UncontrolledForm';
 
-import {HEROS} from '../shared/heros.js';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { HEROS } from '../shared/heros';
+import { addComments } from '../redux/ActionCreators';
 
-import { Switch, Route, Redirect } from 'react-router-dom';
+
+
+
+const mapStateToProps = state => {
+    return{
+        heros: state.reducer,
+        comments: state.commentReducer
+    };
+}
+
+const mapDispatchToProps = dispatch =>({
+    addComments: (name, email, telNo) => dispatch(addComments(name, email, telNo))
+});
 
 class Main extends Component{
     
     constructor(props){
         super(props);
-
-        this.state={
-            heros: HEROS
-        }
     }
+
+
 
     render(){
 
         const home = () =>{
             return(
-                <Home heros={this.state.heros} />
+                <Home heros={this.props.heros} />
             );
         }
 
         const hero =({match}) => {
             return(
-                <HeroDescription  hero={this.state.heros.filter( (hero) => hero.id === parseInt(match.params.heroId,10))[0] } />
+                <HeroDescription  hero={this.props.heros.filter( (hero) => hero.id === parseInt(match.params.heroId,10))[0] } />
             );
         }
 
@@ -45,11 +58,12 @@ class Main extends Component{
                 <div>
                     <Switch>
                         <Route path="/home" component={home} />
-                        <Route exact path="/heros" component={() => <Heros heros={this.state.heros} /> } />
+                        <Route exact path="/heros" component={() => <Heros heros={this.props.heros} /> } />
                         
                         <Route path="/heros/:heroId" component={hero} />
 
-                        <Route path='/form' component={ () => <FormComponent /> } />
+                        <Route path='/form' component={ () => <FormComponent comments={this.props.comments} 
+                                                                            addComments = {this.props.addComments}/> } />
 
                         <Route path='/uform' component={ () => <UncontrolledForm /> } />
 
@@ -65,5 +79,5 @@ class Main extends Component{
     }
 }
 
-export default Main;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
 

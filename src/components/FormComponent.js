@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Col, Button, Input, FormFeedback} from 'reactstrap';
+import { Form, FormGroup, Label, Col, Button, Input, FormFeedback, Media } from 'reactstrap';
+
+import { COMMENTS} from '../shared/comments';
 
 class FormComponent extends Component{
 
@@ -12,6 +14,7 @@ class FormComponent extends Component{
             email: '',
             selected: 'Wolverine',
             agree: false,
+            comments: COMMENTS[0],
             errors: {
                 name: '',
                 telNo: '',
@@ -27,10 +30,16 @@ class FormComponent extends Component{
 
     handleSubmit(event){
         
+     if(this.state.errors.name === '' && this.state.errors.telNo === '' && this.state.errors.email === ''){
+        this.props.addComments(this.state.name,this.state.email,this.state.telNo);
         alert("This is only for your Information!!! \nName : " + JSON.stringify(this.state.name) + "\nTel No. : " + JSON.stringify(this.state.telNo) +
                 "\nEmail : " + JSON.stringify(this.state.email) + "\nFavorite Hero : " + JSON.stringify(this.state.selected) + 
                 "\nSend me Notification : " + JSON.stringify(this.state.agree) );
-        event.preventDefault();
+     }
+     else{
+         alert("Some Errors!!!");
+         event.preventDefault();
+     }
         
     }
 
@@ -66,6 +75,17 @@ class FormComponent extends Component{
     }
 
     render(){        
+
+        var comments = this.props.comments.map( (comment) => {
+            return(
+                <div>
+                    <p>{comment.id}</p>
+                    <p>{comment.name}</p>
+                    <p>{comment.email}</p>
+                    <p>{comment.telNo}</p>
+                </div>
+            );
+        });
 
         return(
             <div className="container">
@@ -136,6 +156,11 @@ class FormComponent extends Component{
                         </Col>
                     </FormGroup>
                 </Form>
+                <div className="col-12">
+                    <h1>Comments</h1>
+                    {comments}
+                    
+                </div>
             </div>
         );
     }
