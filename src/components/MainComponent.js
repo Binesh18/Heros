@@ -11,8 +11,8 @@ import UncontrolledForm from './UncontrolledForm';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { HEROS } from '../shared/heros';
-import { addComments } from '../redux/ActionCreators';
+
+import { addComments, fetchHeros } from '../redux/ActionCreators';
 
 
 
@@ -25,8 +25,11 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch =>({
-    addComments: (name, email, telNo) => dispatch(addComments(name, email, telNo))
+    addComments: (name, email, telNo) => dispatch(addComments(name, email, telNo)),
+    fetchHeros: () => { dispatch( fetchHeros() )}
 });
+
+
 
 class Main extends Component{
     
@@ -34,10 +37,14 @@ class Main extends Component{
         super(props);
     }
 
-
+    componentDidMount() {
+        this.props.fetchHeros();
+    }
 
     render(){
 
+        
+    
         const home = () =>{
             return(
                 <Home heros={this.props.heros} />
@@ -46,9 +53,12 @@ class Main extends Component{
 
         const hero =({match}) => {
             return(
-                <HeroDescription  hero={this.props.heros.filter( (hero) => hero.id === parseInt(match.params.heroId,10))[0] } />
+                <HeroDescription  hero={this.props.heros.heros.filter( (hero) => hero.id === parseInt(match.params.heroId,10))[0] } 
+                                    herosLoading = {this.props.heros.isLoading} 
+                                    heroErrMess = {this.props.heros.errMess} />
             );
         }
+        
 
         return(
             <div className="App">
@@ -58,7 +68,9 @@ class Main extends Component{
                 <div>
                     <Switch>
                         <Route path="/home" component={home} />
-                        <Route exact path="/heros" component={() => <Heros heros={this.props.heros} /> } />
+                        <Route exact path="/heros" component={() => <Heros heros={this.props.heros.heros} 
+                                                                           herosLoading = {this.props.heros.isLoading} 
+                                                                           heroErrMess = {this.props.heros.errMess} /> } />
                         
                         <Route path="/heros/:heroId" component={hero} />
 
@@ -77,6 +89,7 @@ class Main extends Component{
             </div>
         );
     }
+    
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
